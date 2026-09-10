@@ -1,4 +1,3 @@
-import map from 'lodash/map';
 import {
   drawMovesOnBoard,
 } from './chess';
@@ -19,12 +18,8 @@ import {
   markExtentionInit,
 } from './utils';
 import {
-  commands,
-} from './commands';
-import {
   renderBlindfold,
 } from './blindfold';
-import autocomplete from './lib/autocomplete';
 import { i18n } from './i18n';
 
 /**
@@ -51,20 +46,7 @@ function init() {
 
     bindInputKeyDown(input);
     bindInputFocus(input);
-    boardElement.appendChild(wrapper);
-    setTimeout(() => input.focus());
-
-    autocomplete({
-      selector: '.ccHelper-input',
-      minChars: 1,
-      source: (term, suggest) => {
-        term = term.toLowerCase();
-        const choices = commands
-          .filter(c => c.isAvailable())
-          .map((c) => `/${c.name}`);
-        suggest(choices.filter((choice) => !choice.toLowerCase().indexOf(term)));
-      },
-    });
+    document.body.appendChild(wrapper);
 
     startUpdatingAriaHiddenElements();
     bindBlindFoldPeek(input);

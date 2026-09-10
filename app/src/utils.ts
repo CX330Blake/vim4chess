@@ -121,8 +121,10 @@ export function createInitialElements() {
         class="ccHelper-input"
         id="ccHelper-input"
         placeholder="${i18n('inputHint')}"
+        aria-label="${i18n('inputHint')}"
       >
       <div class="ccHelper-label" aria-hidden="true"></div>
+      <kbd class="ccHelper-shortcut" aria-hidden="true">I</kbd>
     </div>
   `);
   const input = <HTMLInputElement>wrapper.querySelector('#ccHelper-input');

@@ -26,6 +26,13 @@ const KEY_CODES = {
  * Bind hotkeys connected with focusing of the input
  */
 export function bindInputFocus(input: HTMLInputElement) {
+  input.addEventListener('blur', () => {
+    if (input.value) {
+      input.value = '';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (isModifierPressed(e)) {
       // prevent native events from being prevented
@@ -41,8 +48,7 @@ export function bindInputFocus(input: HTMLInputElement) {
         }
       });
     } else if (
-      // latin & cyrillic
-      /^[cс]$/i.test(e.key) &&
+      /^[iі]$/i.test(e.key) &&
       e.target !== input &&
       !isEditable(<Nullable<Element>>e.target)
     ) {
@@ -57,8 +63,28 @@ export function bindInputFocus(input: HTMLInputElement) {
  * Responsible for submitting move, backward/forward moves, etc.
  */
 export function bindInputKeyDown(input: HTMLInputElement) {
+  let lastJKeyDownAt = 0;
+
   input.addEventListener('keydown', (e) => {
     e.stopPropagation();
+
+    const cursor = input.selectionStart;
+    const isJkSequence = (
+      e.key === 'k' &&
+      Date.now() - lastJKeyDownAt < 600 &&
+      cursor !== null &&
+      cursor === input.selectionEnd &&
+      input.value[cursor - 1] === 'j'
+    );
+
+    if (isJkSequence && cursor !== null) {
+      input.blur();
+      lastJKeyDownAt = 0;
+      e.preventDefault();
+      return;
+    }
+
+    lastJKeyDownAt = e.key === 'j' ? Date.now() : 0;
 
     if (e.keyCode === KEY_CODES.enter) {
       if (!input.value) {
@@ -73,22 +99,10 @@ export function bindInputKeyDown(input: HTMLInputElement) {
 
         if (success) {
           input.value = '';
-
-          // needed to remove autocomplete
-          // after successful command execution
-          setTimeout(() => {
-            const event = new Event('keyup');
-            input.dispatchEvent(event);
-          }, 200);
         }
       }
-
-      input.focus();
     } else if (e.keyCode === KEY_CODES.escape) {
-      input.value = '';
-
-      const board = getBoard();
-      board && board.clearAllMarkings();
+      input.blur();
       e.preventDefault();
     } else if (holdingCtrlOrCmd(e)) {
       if (e.keyCode === KEY_CODES.leftArrow) {
