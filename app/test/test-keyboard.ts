@@ -80,4 +80,54 @@ describe('Keyboard input', function() {
     assert.equal(input.value, '');
     input.remove();
   });
+
+  it('toggles input auto-hide with /hide', function() {
+    const wrapper = document.createElement('div');
+    const input = document.createElement('input');
+    wrapper.className = 'ccHelper-wrapper ccHelper-wrapper--autoHide';
+    wrapper.appendChild(input);
+    document.body.appendChild(wrapper);
+    bindInputKeyDown(input);
+    input.focus();
+    input.value = '/hide';
+
+    input.dispatchEvent(new KeyboardEvent('keydown', {
+      key: 'Enter',
+      keyCode: 13,
+      bubbles: true,
+      cancelable: true,
+    }));
+
+    assert.equal(wrapper.classList.contains('ccHelper-wrapper--autoHide'), false);
+    assert.equal(input.value, '');
+    assert.notEqual(document.activeElement, input);
+    wrapper.remove();
+  });
+
+  it('autocompletes /hide with Tab', function() {
+    const wrapper = document.createElement('div');
+    const input = document.createElement('input');
+    const completion = document.createElement('button');
+    wrapper.className = 'ccHelper-wrapper';
+    completion.className = 'ccHelper-completion';
+    completion.hidden = true;
+    wrapper.appendChild(input);
+    wrapper.appendChild(completion);
+    document.body.appendChild(wrapper);
+    bindInputKeyDown(input);
+    input.value = '/h';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+
+    assert.equal(completion.hidden, false);
+    input.dispatchEvent(new KeyboardEvent('keydown', {
+      key: 'Tab',
+      keyCode: 9,
+      bubbles: true,
+      cancelable: true,
+    }));
+
+    assert.equal(input.value, '/hide');
+    assert.equal(completion.hidden, true);
+    wrapper.remove();
+  });
 });

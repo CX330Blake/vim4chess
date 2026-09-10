@@ -115,16 +115,31 @@ export function isModifierPressed(e: KeyboardEvent) {
  */
 export function createInitialElements() {
   const wrapper = domify(`
-    <div class="ccHelper-wrapper">
+    <div class="ccHelper-wrapper ccHelper-wrapper--autoHide">
       <input
         type="text"
         class="ccHelper-input"
         id="ccHelper-input"
         placeholder="${i18n('inputHint')}"
         aria-label="${i18n('inputHint')}"
+        aria-autocomplete="list"
+        aria-controls="ccHelper-completions"
+        aria-expanded="false"
       >
       <div class="ccHelper-label" aria-hidden="true"></div>
       <kbd class="ccHelper-shortcut" aria-hidden="true">I</kbd>
+      <button
+        type="button"
+        class="ccHelper-completion"
+        id="ccHelper-completions"
+        tabindex="-1"
+        aria-label="${i18n('hideCommandHint')}"
+        hidden
+      >
+        <code>/hide</code>
+        <span>${i18n('hideCommandHint')}</span>
+        <kbd>Tab</kbd>
+      </button>
     </div>
   `);
   const input = <HTMLInputElement>wrapper.querySelector('#ccHelper-input');

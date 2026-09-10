@@ -66,6 +66,9 @@ export type TTranslationId =
   'blindFoldPeekHint' |
   'blindFoldOn' |
   'blindfoldToggleHint' |
+  'autoHideOn' |
+  'autoHideOff' |
+  'hideCommandHint' |
   '_test' |
   '_test_1_placeholder' |
   '_test_2_placeholders';

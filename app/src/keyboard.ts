@@ -8,10 +8,16 @@ import {
   holdingCtrlOrCmd,
   isEditable,
   isModifierPressed,
+  postMessage,
 } from './utils';
 import {
   Nullable,
 } from './types';
+import { i18n } from './i18n';
+
+const AUTO_HIDE_CLASSNAME = 'ccHelper-wrapper--autoHide';
+const AUTO_HIDE_STORAGE_KEY = 'ccHelper-autoHide';
+const HIDE_COMMAND = '/hide';
 
 const KEY_CODES = {
   enter: 13,
@@ -64,9 +70,51 @@ export function bindInputFocus(input: HTMLInputElement) {
  */
 export function bindInputKeyDown(input: HTMLInputElement) {
   let lastJKeyDownAt = 0;
+  const wrapper = input.closest('.ccHelper-wrapper');
+  const completion = wrapper && wrapper.querySelector<HTMLElement>('.ccHelper-completion');
+
+  const completeHideCommand = () => {
+    input.value = HIDE_COMMAND;
+    input.setSelectionRange(HIDE_COMMAND.length, HIDE_COMMAND.length);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+
+  const updateCompletion = () => {
+    if (!completion) {
+      return;
+    }
+
+    const value = input.value.trim().toLowerCase();
+    const isVisible = value.length > 0 &&
+      value !== HIDE_COMMAND &&
+      HIDE_COMMAND.startsWith(value);
+    completion.hidden = !isVisible;
+    input.setAttribute('aria-expanded', String(isVisible));
+  };
+
+  if (wrapper) {
+    wrapper.classList.toggle(AUTO_HIDE_CLASSNAME, getAutoHidePreference());
+  }
+
+  input.addEventListener('input', updateCompletion);
+  input.addEventListener('blur', updateCompletion);
+  completion && completion.addEventListener('mousedown', (e) => e.preventDefault());
+  completion && completion.addEventListener('click', completeHideCommand);
 
   input.addEventListener('keydown', (e) => {
     e.stopPropagation();
+
+    if (completion && !completion.hidden) {
+      if (e.key === 'Tab') {
+        completeHideCommand();
+        e.preventDefault();
+        return;
+      }
+
+      if (e.keyCode === KEY_CODES.enter) {
+        completeHideCommand();
+      }
+    }
 
     const cursor = input.selectionStart;
     const isJkSequence = (
@@ -88,6 +136,17 @@ export function bindInputKeyDown(input: HTMLInputElement) {
 
     if (e.keyCode === KEY_CODES.enter) {
       if (!input.value) {
+        return;
+      }
+
+      if (input.value.trim().toLowerCase() === HIDE_COMMAND && wrapper) {
+        const autoHideEnabled = !wrapper.classList.contains(AUTO_HIDE_CLASSNAME);
+        wrapper.classList.toggle(AUTO_HIDE_CLASSNAME, autoHideEnabled);
+        setAutoHidePreference(autoHideEnabled);
+        postMessage(i18n(autoHideEnabled ? 'autoHideOn' : 'autoHideOff'));
+        input.value = '';
+        input.blur();
+        e.preventDefault();
         return;
       }
 
@@ -130,6 +189,22 @@ export function bindInputKeyDown(input: HTMLInputElement) {
       }
     }
   });
+}
+
+function getAutoHidePreference() : boolean {
+  try {
+    return localStorage.getItem(AUTO_HIDE_STORAGE_KEY) !== 'false';
+  } catch (e) {
+    return true;
+  }
+}
+
+function setAutoHidePreference(enabled: boolean) : void {
+  try {
+    localStorage.setItem(AUTO_HIDE_STORAGE_KEY, String(enabled));
+  } catch (e) {
+    // Keep the setting for this page when storage is unavailable.
+  }
 }
 
 /**
