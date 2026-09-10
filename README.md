@@ -1,10 +1,12 @@
 # vim4chess
 
+<img width="500" height="500" alt="ChatGPT_Image_Sep_10__2026__04_20_38_PM-removebg-preview" src="https://github.com/user-attachments/assets/de754257-3c3d-48b6-9792-67b5cbf41b31" />
+
 Play on [Chess.com](https://www.chess.com/) without leaving the keyboard. vim4chess adds a Vim-inspired move field with algebraic and coordinate notation and live move previews.
 
-![Chess keyboard input](https://i.imgur.com/ehN2pfT.png)
+https://github.com/user-attachments/assets/ba1fd39b-4bdb-4b37-b9e2-fb77554a2034
 
-vim4chess is a fork of [everyonesdesign/Chess-Helper](https://github.com/everyonesdesign/Chess-Helper).
+> vim4chess is a fork of [everyonesdesign/Chess-Helper](https://github.com/everyonesdesign/Chess-Helper).
 
 ## Features
 
