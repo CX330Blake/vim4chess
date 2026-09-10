@@ -89,11 +89,18 @@ function init() {
  */
 function updatePlaceholder(unfocusedLabel: HTMLElement) {
   const active = document.activeElement;
+  const text = isEditable(active)
+    ? i18n('focusHintFromOther')
+    : i18n('focusHint');
 
-  if (isEditable(active)) {
-    unfocusedLabel.textContent = i18n('focusHintFromOther');
-  } else {
-    unfocusedLabel.textContent = i18n('focusHint');
+  unfocusedLabel.textContent = text;
+
+  const wrapper = unfocusedLabel.closest<HTMLElement>('.ccHelper-wrapper');
+  const context = document.createElement('canvas').getContext('2d');
+  if (wrapper && context) {
+    context.font = getComputedStyle(unfocusedLabel).font;
+    const width = Math.ceil(context.measureText(text).width + 70);
+    wrapper.style.setProperty('--ccHelper-normal-width', `${width}px`);
   }
 }
 

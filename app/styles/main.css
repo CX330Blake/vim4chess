@@ -25,9 +25,12 @@
         transform 0.38s cubic-bezier(0.2, 0.9, 0.25, 1.15);
 }
 
+.ccHelper-wrapper:not(:focus-within) {
+    width: min(var(--ccHelper-normal-width, 320px), calc(100vw - 32px));
+}
+
 .ccHelper-wrapper--autoHide:not(:focus-within) {
     bottom: -32px;
-    width: min(360px, calc(100vw - 32px));
     opacity: 0.72;
     transform: translateX(-50%) scale(0.96);
 }
@@ -292,9 +295,12 @@ input[type="text"].ccHelper-input::placeholder {
         width: calc(100vw - 24px);
     }
 
+    .ccHelper-wrapper:not(:focus-within) {
+        width: min(var(--ccHelper-normal-width, 320px), calc(100vw - 24px));
+    }
+
     .ccHelper-wrapper--autoHide:not(:focus-within) {
         bottom: -32px;
-        width: min(360px, calc(100vw - 24px));
     }
 
     .ccHelper-messages {
