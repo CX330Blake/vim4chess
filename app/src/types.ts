@@ -63,9 +63,6 @@ export type TTranslationId =
   'inputHint' |
   'focusHint' |
   'focusHintFromOther' |
-  'blindFoldPeekHint' |
-  'blindFoldOn' |
-  'blindfoldToggleHint' |
   'autoHideOn' |
   'autoHideOff' |
   'hideCommandHint' |

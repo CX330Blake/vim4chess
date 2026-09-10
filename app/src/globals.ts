@@ -8,6 +8,3 @@ export const drawCache = new WeakMap;
 
 // elements hidden from screen readers
 export const ariaHiddenElements = new WeakMap;
-
-// blindfold overlays
-export const blindfoldOverlays = new WeakMap;

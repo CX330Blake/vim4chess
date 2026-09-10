@@ -1,23 +1,20 @@
-# key2chess
+# vim4chess
 
-> This project is a fork of [everyonesdesign/Chess-Helper](https://github.com/everyonesdesign/Chess-Helper).
-
-[![Test CI](https://github.com/CX330Blake/key2chess/actions/workflows/test.yml/badge.svg)](https://github.com/CX330Blake/key2chess/actions/workflows/test.yml)
-
-Use your keyboard to make moves on [Chess.com](https://www.chess.com/). This fork streamlines the original extension with Vim-style input controls and an auto-hiding move field.
+Play on [Chess.com](https://www.chess.com/) without leaving the keyboard. vim4chess adds a Vim-inspired move field with algebraic and coordinate notation and live move previews.
 
 ![Chess keyboard input](https://i.imgur.com/ehN2pfT.png)
+
+vim4chess is a fork of [everyonesdesign/Chess-Helper](https://github.com/everyonesdesign/Chess-Helper).
 
 ## Features
 
 - Enter moves without reaching for the mouse.
-- Use algebraic notation, such as `Nf3` or `O-O`.
-- Use coordinate notation, such as `e2e4`, `e2 e4`, or `e2-e4`.
-- Preview candidate moves directly on the board while typing.
-- Play in blindfold mode and temporarily reveal the board when needed.
-- Hide the move field automatically for a less distracting interface.
+- Use algebraic notation such as `Nf3` and `O-O`.
+- Use coordinate notation such as `e2e4`, `e2 e4`, and `e2-e4`.
+- Preview candidate moves on the board as you type.
+- Hide the move field automatically to keep the board uncluttered.
 
-## Keyboard Controls
+## Controls
 
 | Key | Action |
 | --- | --- |
@@ -26,33 +23,28 @@ Use your keyboard to make moves on [Chess.com](https://www.chess.com/). This for
 | `Esc` or `jk` | Leave the move field |
 | `Ctrl/Cmd + Left` | Go to the previous move |
 | `Ctrl/Cmd + Right` | Go to the next move |
-| Hold `Ctrl` | Peek at the board in blindfold mode |
 
-Enter `/hide` to toggle automatic hiding of the move field. The preference is saved in your browser.
+Type `/hide` in the move field to toggle automatic hiding. The preference is saved in your browser.
 
 ## Install from Source
 
-Requirements:
-
-- Node.js
-- npm
-- A Chromium-based browser or Firefox
-
-Install dependencies and build the extension:
+You need [Node.js](https://nodejs.org/), npm, and a Chromium-based browser or Firefox.
 
 ```sh
 npm install
 npm run build
 ```
 
-The unpacked extension is generated in `app/`.
+The build is written to `app/`.
 
-### Chrome, Edge, Brave, or Opera
+### Chromium
+
+For Chrome, Edge, Brave, or Opera:
 
 1. Open the browser's extensions page.
 2. Enable developer mode.
-3. Choose **Load unpacked**.
-4. Select the `app/` directory.
+3. Select **Load unpacked**.
+4. Choose the `app/` directory.
 
 ### Firefox
 
@@ -60,49 +52,27 @@ The unpacked extension is generated in `app/`.
 2. Select **Load Temporary Add-on**.
 3. Choose `app/manifest.json`.
 
-Temporary Firefox extensions are removed when the browser restarts.
+Firefox removes temporary extensions when the browser restarts.
 
 ## Development
 
-Build once:
-
 ```sh
-npm run build
-```
-
-Rebuild when files change:
-
-```sh
-npm run watch
-```
-
-Run unit tests:
-
-```sh
-npm test
-```
-
-Run end-to-end tests with Cypress:
-
-```sh
-npm run e2e
-```
-
-Create a production zip archive:
-
-```sh
-npm run pack
+npm run build       # Build once
+npm run watch       # Rebuild on file changes
+npm test            # Run unit tests
+npm run e2e         # Run Cypress end-to-end tests
+npm run pack         # Create a production archive
 ```
 
 ## Support
 
-[![Support me on Ko-fi](https://storage.ko-fi.com/cdn/kofi2.png?v=3)](https://ko-fi.com/L2J826QE4N)
+<a href="https://ko-fi.com/L2J826QE4N"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" width="25%"></a>
 
 ## Disclaimer
 
 This extension is provided as-is and may contain bugs. You are responsible for any moves, game outcomes, or interruptions caused by its use.
 
-The project is not intended to violate the [Chess.com User Agreement](https://www.chess.com/legal/user-agreement). Do not use it for engine assistance, automation, or any other prohibited activity.
+vim4chess is not intended to violate the [Chess.com User Agreement](https://www.chess.com/legal/user-agreement). Do not use it for engine assistance, automation, or any other prohibited activity.
 
 ## License
 

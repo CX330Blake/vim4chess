@@ -7,7 +7,6 @@ import {
 import {
   bindInputKeyDown,
   bindInputFocus,
-  bindBlindFoldPeek,
 } from './keyboard';
 import {
   onDocumentReady,
@@ -17,9 +16,6 @@ import {
   startUpdatingAriaHiddenElements,
   markExtentionInit,
 } from './utils';
-import {
-  renderBlindfold,
-} from './blindfold';
 import { i18n } from './i18n';
 
 /**
@@ -49,7 +45,6 @@ function init() {
     document.body.appendChild(wrapper);
 
     startUpdatingAriaHiddenElements();
-    bindBlindFoldPeek(input);
 
     document.addEventListener('ccHelper-draw', () => {
       const board = getBoard();
@@ -82,7 +77,6 @@ function init() {
   }
 
   markExtentionInit();
-  renderBlindfold();
 }
 
 /**
@@ -105,5 +99,4 @@ function updatePlaceholder(unfocusedLabel: HTMLElement) {
 
 onDocumentReady(() => {
   setTimeout(init, 500);
-  renderBlindfold();
 });

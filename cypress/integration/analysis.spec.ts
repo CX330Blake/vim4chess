@@ -11,9 +11,6 @@ import { INPUT_SELECTOR } from '../constants';
 const ARROW_SELECTOR = 'img.chessBoardArrow';
 const E2E4_ARROW_SELECTOR = 'chess-board .arrows [data-arrow="e2e4"], wc-chess-board [id="arrow-e2e4"]';
 const SQUARE_SELECTOR = 'chess-board [class^="highlight square-"][style="background-color: rgb(255, 68, 68); opacity: 0.8;"], wc-chess-board [class^="highlight square-"][style="background-color: rgb(255, 68, 68); opacity: 0.8;"]';
-const BLINDFOLD_SELECTOR = '.ccHelper-blindfold';
-const BLINDFOLD_BODY_CLASS = 'ccHelper-docBody--blindfolded';
-const BLINDFOLD_HEAD_CLASS = 'ccHelper-docHead--blindfolded';
 
 context('Analysis page', () => {
   beforeEach(() => {
@@ -89,43 +86,6 @@ context('Analysis page', () => {
       .flipBoard()
       .makeMove('Nge2')
       .fenEquals('r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPPNPPP/R1BQKB1R b KQkq - 3 3')
-  });
-
-  it('toggles blindfold mode', function() {
-    cy
-      .get(BLINDFOLD_SELECTOR)
-      .should('not.exist')
-    cy
-      .get('head')
-      .should('not.have.class', BLINDFOLD_HEAD_CLASS)
-    cy
-      .get('body')
-      .should('not.have.class', BLINDFOLD_BODY_CLASS)
-
-
-    // TOGGLE ON
-    cy.makeMove('/blindfold')
-    cy
-      .get(BLINDFOLD_SELECTOR)
-      .should('exist')
-    cy
-      .get('head')
-      .should('have.class', BLINDFOLD_HEAD_CLASS)
-    cy
-      .get('body')
-      .should('have.class', BLINDFOLD_BODY_CLASS)
-
-    // TOGGLE OFF
-    cy.makeMove('/blindfold')
-    cy
-      .get(BLINDFOLD_SELECTOR)
-      .should('exist')
-    cy
-      .get('head')
-      .should('not.have.class', BLINDFOLD_HEAD_CLASS)
-    cy
-      .get('body')
-      .should('not.have.class', BLINDFOLD_BODY_CLASS)
   });
 
   it("doesn't have access to 'confirm' command (it's only for daily)", function() {

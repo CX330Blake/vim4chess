@@ -206,20 +206,3 @@ function setAutoHidePreference(enabled: boolean) : void {
     // Keep the setting for this page when storage is unavailable.
   }
 }
-
-/**
- * Bind keyboards listeners to peek from keyboard
- * in blindfold mode
- */
-export function bindBlindFoldPeek(input: HTMLInputElement) {
-  const updatePeekClass = (e: KeyboardEvent) => {
-    document.body.classList.toggle('ccHelper-docBody--peeked', !!e.ctrlKey);
-  };
-  document.body.addEventListener('keydown', updatePeekClass);
-  document.body.addEventListener('keyup', updatePeekClass);
-
-  // input stops events propagation, so that's why
-  // we want to duplicate these listeners
-  input.addEventListener('keydown', updatePeekClass);
-  input.addEventListener('keyup', updatePeekClass);
-}
