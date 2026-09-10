@@ -1,114 +1,109 @@
-# Chess Helper Extension
+# key2chess
 
-[![Build Status](https://github.com/everyonesdesign/Chess-Helper/actions/workflows/test.yml/badge.svg)
-](https://github.com/everyonesdesign/Chess-Helper/actions)
+> This project is a fork of [everyonesdesign/Chess-Helper](https://github.com/everyonesdesign/Chess-Helper).
 
-## Download extension
+[![Test CI](https://github.com/CX330Blake/key2chess/actions/workflows/test.yml/badge.svg)](https://github.com/CX330Blake/key2chess/actions/workflows/test.yml)
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/bghaancnengidpcefpkbbppinjmfnlhh/)
-|
-[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/chess-com-keyboard/)
-|
-[Opera addons](https://addons.opera.com/en/extensions/details/chesscom-keyboard/)
-|
-[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/illcfglagdbmhknamgjfcpkkpdfddnno)
+Use your keyboard to make moves on [Chess.com](https://www.chess.com/). This fork streamlines the original extension with Vim-style input controls and an auto-hiding move field.
 
-## Other links
+![Chess keyboard input](https://i.imgur.com/ehN2pfT.png)
 
-[Website](http://everyonesdesign.ru/apps/chesscom-keyboard/)
-|
-[Demo Video](https://www.youtube.com/watch?v=C99DwXs6JNU)
-|
-[Trello Board](https://trello.com/b/xaiPLyB0)
-|
-[☕ Buy me a coffee](https://buymeacoff.ee/everyonesdesign)
+## Features
 
-## About
+- Enter moves without reaching for the mouse.
+- Use algebraic notation, such as `Nf3` or `O-O`.
+- Use coordinate notation, such as `e2e4`, `e2 e4`, or `e2-e4`.
+- Preview candidate moves directly on the board while typing.
+- Play in blindfold mode and temporarily reveal the board when needed.
+- Hide the move field automatically for a less distracting interface.
 
-A small Google Chrome extension adding keyboard navigation to [chess.com](https://www.chess.com/) website.
+## Keyboard Controls
 
-It supports moves input in:
+| Key | Action |
+| --- | --- |
+| `I` | Focus the move field |
+| `Enter` | Submit the current move |
+| `Esc` or `jk` | Leave the move field |
+| `Ctrl/Cmd + Left` | Go to the previous move |
+| `Ctrl/Cmd + Right` | Go to the next move |
+| Hold `Ctrl` | Peek at the board in blindfold mode |
 
-- algebraic notation: 'Nf3', '0-0';
-- coordinates notation: 'e2e4' ('e2 e4' and 'e2-e4' can be also used).
+Enter `/hide` to toggle automatic hiding of the move field. The preference is saved in your browser.
 
-Other move formats may be implemented in future.
+## Install from Source
 
-<img src="https://i.imgur.com/ehN2pfT.png" alt="Chess Helper Extension" width=428 height=474>
+Requirements:
 
-This way of moving pieces may enhance your board vision skills; it can also be used to improve chess.com interface accessibility.
+- Node.js
+- npm
+- A Chromium-based browser or Firefox
 
+Install dependencies and build the extension:
 
-## Command line instructions
-
-Install dependencies
-
-```
-npm i
-```
-
-Build the project
-
-```
+```sh
+npm install
 npm run build
 ```
 
-Build the and watch file changes
+The unpacked extension is generated in `app/`.
 
+### Chrome, Edge, Brave, or Opera
+
+1. Open the browser's extensions page.
+2. Enable developer mode.
+3. Choose **Load unpacked**.
+4. Select the `app/` directory.
+
+### Firefox
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Select **Load Temporary Add-on**.
+3. Choose `app/manifest.json`.
+
+Temporary Firefox extensions are removed when the browser restarts.
+
+## Development
+
+Build once:
+
+```sh
+npm run build
 ```
+
+Rebuild when files change:
+
+```sh
 npm run watch
 ```
 
-Run unit tests
+Run unit tests:
 
-```
-npm run test
+```sh
+npm test
 ```
 
-Run e2e tests (Cypress)
+Run end-to-end tests with Cypress:
 
-```
+```sh
 npm run e2e
 ```
 
-Pack the extension (before release to extension stores)
+Create a production zip archive:
 
-```
+```sh
 npm run pack
 ```
 
-## Memo for the extension release
+## Support
 
-```
-# use either of the following
-npm run release -- --patch
-npm run release -- --minor
-npm run release -- --major
-```
+[![Support me on Ko-fi](https://storage.ko-fi.com/cdn/kofi2.png?v=3)](https://ko-fi.com/L2J826QE4N)
 
-## Memo for the extension publishing
+## Disclaimer
 
-Stores links:
-- https://chrome.google.com/webstore/developer/dashboard
-- https://addons.opera.com/developer/
-- https://partner.microsoft.com/en-us/dashboard/microsoftedge/overview
-- https://addons.mozilla.org/en-US/developers/
+This extension is provided as-is and may contain bugs. You are responsible for any moves, game outcomes, or interruptions caused by its use.
 
-Download source code (Mozilla will require unminified code as file):
-https://github.com/everyonesdesign/Chess-Helper/archive/refs/heads/master.zip
-
-## Disclaimers
-
-The extension code may contain bugs and errors.
-By using the extension user agress that extension author DOESN'T take
-any responsibility for the mistakes in the game, caused by the extension usage,
-or the problems with game process, caused the by the software usage.
-
-The application is NOT designed to violate chess.com terms of usage in any way.
-In case if chess.com contacts extension author about the viloations
-the software may be modified or removed from the extensions stores.
-
+The project is not intended to violate the [Chess.com User Agreement](https://www.chess.com/legal/user-agreement). Do not use it for engine assistance, automation, or any other prohibited activity.
 
 ## License
 
-The extension is MIT-licensed
+Licensed under the [MIT License](LICENSE). The original copyright notice is retained.
