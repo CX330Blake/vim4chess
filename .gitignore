@@ -4,6 +4,7 @@ temp
 dist
 package
 app/build.js
+app/build.js.LICENSE.txt
 app.zip
 cypress/videos
 cypress/screenshots

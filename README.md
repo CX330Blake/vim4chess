@@ -30,7 +30,7 @@ Type `/hide` in the move field to toggle automatic hiding. The preference is sav
 
 ## Install from Source
 
-You need [Node.js](https://nodejs.org/), npm, and a Chromium-based browser or Firefox.
+You need [Node.js](https://nodejs.org/), npm, and a Chromium-based browser or Firefox 140 or newer.
 
 ```sh
 npm install
