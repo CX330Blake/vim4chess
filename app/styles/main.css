@@ -39,7 +39,7 @@
 .ccHelper-wrapper:has(.ccHelper-input:placeholder-shown):not(:focus-within):not(
         :hover
     ) {
-    width: min(280px, calc(100vw - 32px));
+    width: min(360px, calc(100vw - 32px));
 }
 
 /*
@@ -81,6 +81,7 @@ input[type="text"].ccHelper-input:focus {
 
 input[type="text"].ccHelper-input::placeholder {
     color: #aaa7a2;
+    font-weight: normal;
     opacity: 1;
 }
 
@@ -347,7 +348,7 @@ input[type="text"].ccHelper-input::placeholder {
     .ccHelper-wrapper:has(.ccHelper-input:placeholder-shown):not(
             :focus-within
         ):not(:hover) {
-        width: min(240px, calc(100vw - 24px));
+        width: min(360px, calc(100vw - 24px));
     }
 }
 

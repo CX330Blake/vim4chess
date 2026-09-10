@@ -3,8 +3,8 @@ import {
 } from '../../src/types';
 
 const translations : TLocaleSet = {
-  inputHint: 'Enter your move...',
-  focusHint: 'Press I to focus move field...',
+  inputHint: 'Enter your move. Press <esc> or <jk> to leave.',
+  focusHint: 'Press <i> to focus move field...',
   focusHintFromOther: 'Press Esc + I to focus move field...',
   ambiguousMove: 'Ambiguous move: $move',
   incorrectMove: 'Incorrect move: $move',
